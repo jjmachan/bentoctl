@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/quickstart/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Quickstart - bentoctl</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Quickstart";
+        var mkdocs_page_input_path = "quickstart.md";
+        var mkdocs_page_url = "/quickstart/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> bentoctl
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Quickstart</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#step-1-create-a-bento">Step 1: Create a bento</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-2-verify-bento">Step 2: Verify bento</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-3-install-aws-lambda-operator">Step 3: Install aws-lambda operator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-4-generate-deployment-files">Step 4: Generate deployment files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-5-build-image-for-deployment">Step 5: Build image for deployment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-6-deploy-to-lambda">Step 6: Deploy to Lambda</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-7-make-a-prediction">step 7: Make a prediction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-8-cleanup-deployment">Step 8: Cleanup Deployment</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../core-concepts/">Core Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operator-list/">Operators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../cli-reference/">CLI reference</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">bentoctl</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Quickstart</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="quickstart">Quickstart</h1>
+<p>This guide walks through the steps of building a bento and deploying it to AWS Lambda. It will use the iris classifier bento with <code>classify</code> api endpoint created in the BentoML quickstart guide, and then use bentoctl to deploy to AWS lambda.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>Bentoml - BentoML version 1.0 and greater. Please follow the <a href="https://docs.bentoml.org/en/latest/quickstart.html#installation">Installation guide</a>.</li>
+<li>Terraform - <a href="https://www.terraform.io/">Terraform</a> is a tool for building, configuring, and managing infrastructure.</li>
+<li>AWS CLI installed and configured with an AWS account with permission to the Cloudformation, Lamba, API Gateway and ECR. Please follow the <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Installation guide</a>.</li>
+</ol>
+<h3 id="step-1-create-a-bento">Step 1: Create a bento</h3>
+<blockquote>
+<p>Note: Skip to step 2, if you already built a bento with the BentoML 1.0 quick start guide.</p>
+</blockquote>
+<p>Follow the instructions from the <a href="https://docs.bentoml.org/en/latest/quickstart.html">BentoML’s quickstart guide</a> to build a bento.</p>
+<h3 id="step-2-verify-bento">Step 2: Verify bento</h3>
+<p>To verify the bento, run <code>bentoml list</code> to display the available bentos in your local bento store:</p>
+<pre><code class="language-bash">&gt; bentoml list
+
+Tag                               Size       Creation Time        Path
+iris_classifier:btzv5wfv665trhcu  19.78 KiB  2022-04-06 22:15:26  ~/bentoml/bentos/iris_classifier/btzv5wfv665trhcu
+</code></pre>
+<h3 id="step-3-install-aws-lambda-operator">Step 3: Install aws-lambda operator</h3>
+<p>bentoctl has operators that help deploy bentos to different cloud services.</p>
+<blockquote>
+<p><strong>Operator</strong> is a plugin that interacts with the cloud service to perform the bentoctl commands. The operator is responsible for creating and configuring the resources for deploying to the cloud service. Learn more from the <a href="../core-concepts/#operators">Core Concepts</a> page.</p>
+</blockquote>
+<p>This guide uses the official aws-lambda operator to deploy and manage deployments. Run the following command to install the operator and its dependencies to your local system</p>
+<pre><code class="language-bash">bentoctl operator install aws-lambda
+</code></pre>
+<h3 id="step-4-generate-deployment-files">Step 4: Generate deployment files</h3>
+<p>bentoctl uses the deployment configuration to specify the deployment properties and generate Terraform project from that.</p>
+<blockquote>
+<p><strong>Deployment Configuration</strong> is a YAML file that specifies properties of the deployment like which bento service to deploy, what operator to use and other configurations. Learn more from the <a href="../core-concepts/#deployment-configuration">Core Concepts</a> page</p>
+</blockquote>
+<p>bentoctl offers an interactive cli command, <code>bentoctl init</code>, to guide users to generate the deployment configuration and the terraform projects.</p>
+<pre><code class="language-bash">bentoctl init
+
+Bentoctl Interactive Deployment Config Builder
+
+Welcome! You are now in interactive mode.
+
+This mode will help you setup the deployment_config.yaml file required for
+deployment. Fill out the appropriate values for the fields.
+
+(deployment config will be saved to: ./deployment_config.yaml)
+
+api_version: v1
+name: quickstart
+operator: aws-lambda
+template: terraform
+spec:
+    region: us-west-1
+    timeout: 10
+    memory_size: 512
+filename for deployment_config [deployment_config.yaml]:
+deployment config generated to: deployment_config.yaml
+✨ generated template files.
+  - bentoctl.tfvars
+  - main.tf
+</code></pre>
+<h3 id="step-5-build-image-for-deployment">Step 5: Build image for deployment</h3>
+<p>Bentoctl prepares the docker image base on the cloud service's requirements, and then build and push the docker image to the deployment registry.</p>
+<pre><code class="language-bash">bentoctl build -b iris_classifier:btzv5wfv665trhcu -f deployment_config.yaml
+
+Step 1/20 : FROM bentoml/bento-server:1.0.0a7-python3.7-debian-runtime
+ ---&gt; dde7b88477b1
+Step 2/20 : ARG UID=1034
+ ---&gt; Running in b8f4ae1d8b08
+ ---&gt; e6c313c8d9ea
+Step 3/20 : ARG GID=1034
+....
+Step 20/20 : ENTRYPOINT [ &quot;/opt/conda/bin/python&quot;, &quot;-m&quot;, &quot;awslambdaric&quot; ]
+ ---&gt; Running in 4e56057f3b18
+ ---&gt; dca82bca9034
+Successfully built dca82bca9034
+Successfully tagged aws-lambda-iris_classifier:btzv5wfv665trhcu
+🔨 Image build!
+The push refers to repository [192023623294.dkr.ecr.us-west-1.amazonaws.com/quickstart]
+btzv5wfv665trhcu: digest: sha256:ffcd120f7629122cf5cd95664e4fd28e9a50e799be7bb23f0b5b03f14ca5c672 size: 3253
+32096534b881: Pushed
+f709d8f0f57d: Pushed
+7d30486f5c78: Pushed
+...
+c1065d45b872: Pushed
+🚀 Image pushed!
+✨ generated template files.
+  - bentoctl.tfvars
+The push refers to repository [192023623294.dkr.ecr.us-west-1.amazonaws.com/quickstart]
+</code></pre>
+<p>Afterward, bentoctl will update the terraform variables with the docker image information</p>
+<h3 id="step-6-deploy-to-lambda">Step 6: Deploy to Lambda</h3>
+<p>Initialize Terraform project</p>
+<pre><code class="language-bash">terraform init
+</code></pre>
+<p>Apply Terraform changes</p>
+<pre><code class="language-bash">terraform apply -var-file=bentoctl.tfvars --auto-approve
+
+aws_iam_role.lambda_exec: Creating...
+aws_apigatewayv2_api.lambda: Creating...
+aws_apigatewayv2_api.lambda: Creation complete after 1s [id=ka8h2p2yfh]
+aws_cloudwatch_log_group.api_gw: Creating...
+aws_cloudwatch_log_group.api_gw: Creation complete after 0s [id=/aws/api_gw/quickstart-gw]
+aws_apigatewayv2_stage.lambda: Creating...
+aws_iam_role.lambda_exec: Creation complete after 3s [id=quickstart-iam]
+aws_iam_role_policy_attachment.lambda_policy: Creating...
+aws_lambda_function.fn: Creating...
+aws_apigatewayv2_stage.lambda: Creation complete after 2s [id=$default]
+aws_iam_role_policy_attachment.lambda_policy: Creation complete after 1s [id=quickstart-iam-20220414203448384500000001]
+aws_lambda_function.fn: Still creating... [10s elapsed]
+aws_lambda_function.fn: Still creating... [20s elapsed]
+aws_lambda_function.fn: Still creating... [30s elapsed]
+aws_lambda_function.fn: Still creating... [40s elapsed]
+aws_lambda_function.fn: Creation complete after 41s [id=quickstart-function]
+aws_lambda_permission.api_gw: Creating...
+aws_cloudwatch_log_group.lg: Creating...
+aws_apigatewayv2_integration.lambda: Creating...
+aws_lambda_permission.api_gw: Creation complete after 0s [id=AllowExecutionFromAPIGateway]
+aws_cloudwatch_log_group.lg: Creation complete after 0s [id=/aws/lambda/quickstart-function]
+aws_apigatewayv2_integration.lambda: Creation complete after 1s [id=8gumjws]
+aws_apigatewayv2_route.root: Creating...
+aws_apigatewayv2_route.services: Creating...
+aws_apigatewayv2_route.root: Creation complete after 0s [id=jjp5f23]
+aws_apigatewayv2_route.services: Creation complete after 0s [id=8n57a1d]
+
+Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+base_url = &quot;https://ka8h2p2yfh.execute-api.us-west-1.amazonaws.com/&quot;
+function_name = &quot;quickstart-function&quot;
+image_tag = &quot;192023623294.dkr.ecr.us-west-1.amazonaws.com/quickstart:btzv5wfv665trhcu&quot;
+</code></pre>
+<h3 id="step-7-make-a-prediction">step 7: Make a prediction</h3>
+<p>The <code>iris_classifier</code> uses the <code>/classify</code> endpoint for receiving requests so the full URL for the classifier will be in the form <code>{EndpointUrl}/classify</code></p>
+<pre><code class="language-bash">URL=$(terraform output -json | jq -r .base_url.value)classify
+curl -i \
+  --header &quot;Content-Type: application/json&quot; \
+  --request POST \
+  --data '[5.1, 3.5, 1.4, 0.2]' \
+  $URL
+
+HTTP/2 200
+date: Thu, 14 Apr 2022 23:02:45 GMT
+content-type: application/json
+content-length: 1
+apigw-requestid: Ql8zbicdSK4EM5g=
+
+0%
+</code></pre>
+<h3 id="step-8-cleanup-deployment">Step 8: Cleanup Deployment</h3>
+<p>To delete deployment, run the <code>terraform destroy</code> command</p>
+<pre><code class="language-bash">terraform destroy -var-file=bentoctl.tfvars --auto-approve
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../core-concepts/" class="btn btn-neutral float-right" title="Core Concepts">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="../core-concepts/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

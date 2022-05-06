@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/operator-list/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Operators - bentoctl</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Operators";
+        var mkdocs_page_input_path = "operator-list.md";
+        var mkdocs_page_url = "/operator-list/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> bentoctl
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../core-concepts/">Core Concepts</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Operators</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#official-operators">Official Operators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#community-operators">Community Operators</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../cli-reference/">CLI reference</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">bentoctl</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Operators</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="operator-list">Operator List</h1>
+<h2 id="official-operators">Official Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator Name</th>
+<th>Github Repo</th>
+<th>Status [ Migrated to 1.0]</th>
+<th>Guides</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aws-lambda</td>
+<td>https://github.com/bentoml/aws-lambda-deploy/tree/main</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>aws-sagemaker</td>
+<td>https://github.com/bentoml/aws-sagemaker-deploy</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>aws-ec2</td>
+<td>https://github.com/bentoml/aws-ec2-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+<tr>
+<td>google-compute-engine</td>
+<td>https://github.com/bentoml/google-compute-engine-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+<tr>
+<td>google-cloud-run</td>
+<td>https://github.com/bentoml/google-cloud-run-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+<tr>
+<td>azure-functions</td>
+<td>https://github.com/bentoml/azure-functions-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+<tr>
+<td>azure-container-instances</td>
+<td>https://github.com/bentoml/azure-container-instances-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>https://github.com/bentoml/heroku-deploy</td>
+<td>❌</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="community-operators">Community Operators</h2>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../core-concepts/" class="btn btn-neutral float-left" title="Core Concepts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cli-reference/" class="btn btn-neutral float-right" title="CLI reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../core-concepts/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../cli-reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

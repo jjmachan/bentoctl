@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://example.com/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>bentoctl</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Introduction";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/";
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> bentoctl
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="core-concepts/">Core Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="operator-list/">Operators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="cli-reference/">CLI reference</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">bentoctl</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Introduction</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="introduction">Introduction</h1>
+<p>bentoctl is a command line tool for deploying BentoML packaged ML models as API endpoint on popular cloud platforms.
+It automates Bento docker image build, generate terraform project, and easily manage deployments.</p>
+<h2 id="why-bentoctl">Why bentoctl?</h2>
+<ul>
+<li>Supports major cloud providers: AWS, Azure, Google Cloud, and more.</li>
+<li>Easy to deploy, update and reproduce model deployments.</li>
+<li>First class integration with Terraform.</li>
+<li>Optimized for CI/CD workflow.</li>
+<li>Extensible with custom operators.</li>
+<li>
+<p>High performance serving powered by <a href="https://github.com/bentoml/BentoML">BentoML</a>
+Supported platforms:</p>
+</li>
+<li>
+<p><a href="https://github.com/bentoml/aws-lambda-deploy">AWS Lambda</a></p>
+</li>
+<li><a href="https://github.com/bentoml/aws-sagemaker-deploy">AWS SageMaker</a></li>
+<li><a href="https://github.com/bentoml/aws-ec2-deploy">AWS EC2</a></li>
+<li><a href="https://github.com/bentoml/google-cloud-run-deploy">Google Cloud Run</a></li>
+<li><a href="https://github.com/bentoml/azure-functions-deploy">Azure Functions</a></li>
+<li>Looking for <strong>Kubernetes</strong>? Try out <a href="https://github.com/bentoml/Yatai">Yatai: Model deployment at scale on Kubernetes</a>.</li>
+<li><strong>Customize deploy target</strong> by creating bentoctl plugin from the <a href="https://github.com/bentoml/bentoctl-operator-template">deployment operator template</a>.</li>
+</ul>
+<p><strong>Upcoming:</strong>
+* <a href="https://github.com/bentoml/google-compute-engine-deploy">Google Compute Engine</a> (BentoML 1.0 migration in progress)
+* <a href="https://github.com/bentoml/azure-container-instances-deploy">Azure Container Instances</a> (BentoML 1.0 migration in progress)
+* <a href="https://github.com/bentoml/heroku-deploy">Heroku</a> (BentoML 1.0 migration in progress)
+* <a href="https://github.com/bentoml/bentoctl/issues/79">Knative</a> (WIP)</p>
+<h2 id="how-to-install">How to install</h2>
+<p>Install via pip:</p>
+<pre><code class="language-bash">pip install --pre bentoctl
+</code></pre>
+<blockquote>
+<p>bentoctl is in pre-release stage, include the <code>--pre</code> to download the latest version</p>
+</blockquote>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="quickstart/">Quickstart Guide</a> walks through a series of steps to deploy a bento to AWS Lambda as API server.</li>
+<li><a href="core-concepts/">Core Concepts</a> explains the core concepts in bentoctl.</li>
+<li><a href="operator-list/">Operator List</a> lists official operators and their current status.</li>
+</ul>
+<h2 id="community">Community</h2>
+<ul>
+<li>To report a bug or suggest a feature request, use <a href="https://github.com/bentoml/bentoctl/issues/new/choose">GitHub Issues</a>.</li>
+<li>To receive release announcements, please subscribe to our mailing list or join us on <a href="http://join.slack.bentoml.org/">Slack</a>.</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>There are many ways to contribute to the project:</p>
+<ul>
+<li>If you have any feedback on the project, share it with the community in #bentoctl channel in slack.</li>
+<li>Report issues you're facing and "Thumbs up" on issues and feature requests that are relevant to you.</li>
+<li>Investigate bugs and review other developer's pull requests.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2022-05-06 10:42:03.937629+00:00
+-->

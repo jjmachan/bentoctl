@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/013-deployment/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>AWS Lambda deployment tool - bentoctl</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AWS Lambda deployment tool";
+        var mkdocs_page_input_path = "013-deployment.md";
+        var mkdocs_page_url = "/013-deployment/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> bentoctl
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../core-concepts/">Core Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operator-list/">Operators</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../cli-reference/">CLI reference</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">bentoctl</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>AWS Lambda deployment tool</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="aws-lambda-deployment-tool">AWS Lambda deployment tool</h1>
+<p>AWS Lambda is a great service for quickly deploy service to the cloud for immediate
+access. It's ability to auto scale resources base on usage make it attractive to
+user who want to save cost and want to scale base on usage without administrative overhead.</p>
+<p align="center">
+  <img src="./imgs/demo.gif" alt="demo of aws-lambda-deploy tool"/>
+</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>An active AWS account configured on the machine with AWS CLI installed and configured<ul>
+<li>Install instruction: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html</li>
+<li>Configure AWS account instruction: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html</li>
+</ul>
+</li>
+<li>AWS SAM CLI (&gt;=1.27). Installation instructions https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html</li>
+<li>Docker is installed and running on the machine.<ul>
+<li>Install instruction: https://docs.docker.com/install</li>
+</ul>
+</li>
+<li>Bento build built with BentoML version 0.13 or below.</li>
+</ul>
+<h2 id="deploy-irisclassifier-from-bentoml-quick-start-guide-to-aws-lambda">Deploy IrisClassifier from BentoML quick start guide to AWS Lambda</h2>
+<ol>
+<li>
+<p>Setup the AWS Lambda deployment</p>
+<p>a. Clone the operator repo
+    <code>bash
+    git clone https://github.com/bentoml/aws-lambda-deploy.git</code></p>
+<p>b. Install the operator requirements
+    <code>bash
+    cd aws-lambda-deploy
+    pip install -r requirements.txt</code></p>
+</li>
+<li>
+<p>Copy and change the sample config file given and change it according to your deployment specifications.
+    <code># lambda_config.json
+    {
+        "region": "us-west-1",
+        "timeout": 60,
+        "memory_size": 1024
+    }</code></p>
+</li>
+<li>
+<p>Create Lambda  deployment with the deployment tool.</p>
+</li>
+</ol>
+<p>Run deploy script in the command line:</p>
+<pre><code>```bash
+$ BENTO_BUNDLE_PATH=$(bentoml get IrisClassifier:latest --print-location -q)
+$ python deploy.py $BENTO_BUNDLE_PATH my-lambda-deployment lambda_config.json
+```
+</code></pre>
+<p>Get deployment information and status</p>
+<pre><code>```bash
+$ python describe.py my-lambda-deployment
+
+# Sample output
+{
+  "StackId": "arn:aws:cloudformation:us-west-1:192023623294:stack/my-lambda-deployment-stack/29c15040-db7a-11eb-a721-028d528946df",
+  "StackName": "my-lambda-deployment-stack",
+  "StackStatus": "CREATE_COMPLETE",
+  "CreationTime": "07/02/2021, 21:12:09",
+  "LastUpdatedTime": "07/02/2021, 21:12:20",
+  "EndpointUrl": "https://j2gm5zn7z9.execute-api.us-west-1.amazonaws.com/Prod"
+}
+```
+</code></pre>
+<ol>
+<li>
+<p>Make sample request against deployed service. The url for the endpoint given in the output of the describe command or you can also check the API Gateway through the AWS console.</p>
+<p>```bash
+curl -i \
+  --header "Content-Type: application/json" \
+  --request POST \
+  --data '[[5.1, 3.5, 1.4, 0.2]]' \
+  https://j2gm5zn7z9.execute-api.us-west-1.amazonaws.com/Prod/predict</p>
+<h1 id="sample-output">Sample output</h1>
+<p>HTTP/2 200
+content-type: application/json
+content-length: 3
+date: Sat, 03 Jul 2021 19:14:38 GMT
+x-amzn-requestid: d3b5f156-0859-4f69-8b53-c60e800bc0aa
+x-amz-apigw-id: B6GLLECTSK4FY2w=
+x-amzn-trace-id: Root=1-60e0b714-18a97eb5696cec991c460213;Sampled=0
+x-cache: Miss from cloudfront
+via: 1.1 6af3b573d8970d5db2a4d03354335b85.cloudfront.net (CloudFront)
+x-amz-cf-pop: SEA19-C3
+x-amz-cf-id: ArwZ03gbs6GooNN1fy4mPOgaEpM4h4n9gz2lpLYrHmeXZJuGUJgz0Q==</p>
+<p>[0]%
+```</p>
+</li>
+<li>
+<p>Delete Lambda deployment</p>
+<p><code>bash
+$ python delete.py my-lambda-deployment</code></p>
+</li>
+</ol>
+<h2 id="deployment-operations">Deployment operations</h2>
+<h3 id="configuration-options">Configuration options</h3>
+<ul>
+<li><code>region</code>: AWS region for Lambda deployment</li>
+<li><code>timeout</code>: Timeout per request</li>
+<li><code>memory_size</code>: The memory for your function, set a value between 128 MB and 10,240 MB in 1-MB increments</li>
+</ul>
+<h3 id="create-a-deployment">Create a deployment</h3>
+<p>Use CLI</p>
+<pre><code class="language-bash">python deploy.py &lt;Bento_bundle_path&gt; &lt;Deployment_name&gt; &lt;Config_JSON default is ./lambda_config.json&gt;
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-bash">MY_BUNDLE_PATH=${bentoml get IrisClassifier:latest --print-location -q)
+python deploy.py $MY_BUNDLE_PATH my_first_deployment lambda_config.json
+</code></pre>
+<p>Use Python API</p>
+<pre><code class="language-python">from deploy import deploy_aws_lambda
+
+deploy_aws_lambda(BENTO_BUNDLE_PATH, DEPLOYMENT_NAME, CONFIG_JSON)
+</code></pre>
+<h3 id="update-a-deployment">Update a deployment</h3>
+<p>Use CLI</p>
+<pre><code class="language-bash">python update.py &lt;Bento_bundle_path&gt; &lt;Deployment_name&gt; &lt;Config_JSON&gt;
+</code></pre>
+<p>Use Python API</p>
+<pre><code class="language-python">from update import update_aws_lambda
+update_aws_lambda(BENTO_BUNDLE_PATH, DEPLOYMENT_NAME, CONFIG_JSON)
+</code></pre>
+<h3 id="get-deployments-status-and-information">Get deployment's status and information</h3>
+<p>Use CLI</p>
+<pre><code class="language-bash">python describe.py &lt;Deployment_name&gt; &lt;Config_JSON&gt;
+</code></pre>
+<p>Use Python API</p>
+<pre><code class="language-python">from describe import describe_deployment
+describe_deployment(DEPLOYMENT_NAME, CONFIG_JSON)
+</code></pre>
+<h3 id="delete-deployment">Delete deployment</h3>
+<p>Use CLI</p>
+<pre><code class="language-bash">python delete.py &lt;Deployment_name&gt; &lt;Config_JSON&gt;
+</code></pre>
+<p>Use Python API</p>
+<pre><code class="language-python">from  delete import delete_deployment
+delete_deployment(DEPLOYMENT_NAME, CONFIG_JSON)
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/cli-reference/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>CLI reference - bentoctl</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CLI reference";
+        var mkdocs_page_input_path = "cli-reference.md";
+        var mkdocs_page_url = "/cli-reference/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> bentoctl
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../quickstart/">Quickstart</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../core-concepts/">Core Concepts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../operator-list/">Operators</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">CLI reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#apply">apply</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#build">build</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#destroy">destroy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generate">generate</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#init">init</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#operator">operator</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install">install</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list">list</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remove">remove</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update">update</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">bentoctl</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>CLI reference</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bentoctl">bentoctl</h1>
+<p>Bentoctl - Fast model deployment on any cloud platform</p>
+<p>bentoctl is a CLI tool for deploying your machine-learning models to any cloud
+platforms and serving predictions via REST APIs. It is built on top of
+BentoML: the unified model serving framework, and makes it easy to bring any BentoML
+packaged model to production.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl [OPTIONS] COMMAND [ARGS]...
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --version  Show the version and exit.
+  --help     Show this message and exit.
+</code></pre>
+<h2 id="apply">apply</h2>
+<p>[Experimental] Apply the generated template file to create/update the deployment.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl apply [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  -f, --deployment-config-file TEXT
+                                  path to deployment_config file
+  --verbose, --debug              Show debug logs when running the command
+  --do-not-track                  Do not send uage info
+  --help                          Show this message and exit.
+</code></pre>
+<h2 id="build">build</h2>
+<p>Build the Docker image for the given deployment config file and bento.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl build [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  -b, --bento-tag TEXT            Bento tag to use for deployment.  [required]
+  -f, --deployment-config-file TEXT
+                                  path to deployment_config file
+  --dry-run                       Dry run
+  --verbose, --debug              Show debug logs when running the command
+  --do-not-track                  Do not send uage info
+  --help                          Show this message and exit.
+</code></pre>
+<h2 id="destroy">destroy</h2>
+<p>Destroy all the resources created and remove the registry.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl destroy [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  -f, --deployment-config-file TEXT
+                                  path to deployment_config file
+  --verbose, --debug              Show debug logs when running the command
+  --do-not-track                  Do not send uage info
+  --help                          Show this message and exit.
+</code></pre>
+<h2 id="generate">generate</h2>
+<p>Generate template files for deployment.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl generate [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  -f, --deployment-config-file TEXT
+                                  path to deployment config file
+  --save-path DIRECTORY           Path to save the deployment config file.
+  --values-only                   create/update the values file only.
+  --verbose, --debug              Show debug logs when running the command
+  --do-not-track                  Do not send uage info
+  --help                          Show this message and exit.
+</code></pre>
+<h2 id="init">init</h2>
+<p>Start the interactive deployment config builder file.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl init [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --do-not-generate      Generate template files based on the provided
+                         operator.
+  --save-path DIRECTORY  Path to save the deployment config file.
+  --verbose, --debug     Show debug logs when running the command
+  --do-not-track         Do not send uage info
+  --help                 Show this message and exit.
+</code></pre>
+<h2 id="operator">operator</h2>
+<p>Sub-commands to install, list, remove and update operators.</p>
+<p>To see the list of all the operators available and their comparisons check out
+<link to comparisons>.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl operator [OPTIONS] COMMAND [ARGS]...
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --help  Show this message and exit.
+</code></pre>
+<h3 id="install">install</h3>
+<p>install operators.</p>
+<p>There are 5 ways to install an operator into bentoctl and they are -</p>
+<ol>
+<li>
+<p>Interactive Mode: lists all official operators for user to choose from. Just
+   type <code>bentoctl install</code> to enter this mode.</p>
+</li>
+<li>
+<p>Official operator: you can pass the name of one of the official operators
+   and the tool with fetch it for you. You can see the list of official
+   operators <link to list off operators>.
+   eg. <code>bentoctl install aws-lambda</code></p>
+</li>
+<li>
+<p>Path: If you have the operator locally, either because you are building
+   our own operator or if cloning the operator from some other
+   remote repository (other than github) then you can just pass the path
+   after the install command and it will register the local operator for you.
+   This is a special case since the operator will not have an associated URL
+   with it and hence cannot be updated using the tool.</p>
+</li>
+<li>
+<p>Github Repo: this should be in the format
+   <code>repo_owner/repo_name[:repo_branch]</code>.
+   eg: <code>bentoctl install bentoml/aws-lambda-repo</code></p>
+</li>
+<li>
+<p>Git Url: of the form https://[\w]+.git.
+   eg: <code>bentoctl install https://github.com/bentoml/aws-lambda-deploy.git</code></p>
+</li>
+</ol>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl operator install [OPTIONS] [NAME]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --verbose, --debug  Show debug logs when running the command
+  --do-not-track      Do not send uage info
+  --help              Show this message and exit.
+</code></pre>
+<h3 id="list">list</h3>
+<p>List all the available operators.</p>
+<p>Lists the operator, the path from where you can access operator locally and
+if the operator was pulled from github, the github URL is also shown.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl operator list [OPTIONS]
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --verbose, --debug  Show debug logs when running the command
+  --do-not-track      Do not send uage info
+  --help              Show this message and exit.
+</code></pre>
+<h3 id="remove">remove</h3>
+<p>Remove operators.</p>
+<p>This will remove the operator from the list and also remove the local codebase.
+Pass the flag <code>--keep-locally</code> to keep the operator codebase in the local
+director.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl operator remove [OPTIONS] NAME
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  -y                  skip the prompt asking if you are sure.
+  --verbose, --debug  Show debug logs when running the command
+  --do-not-track      Do not send uage info
+  --help              Show this message and exit.
+</code></pre>
+<h3 id="update">update</h3>
+<p>Update an operator given its name.</p>
+<p>This only works for operators that have a URL associated with them. When passed
+the name of an available operator it goes and fetches the latest code from
+the Github repo and update the local codebase with it.</p>
+<p><strong>Usage:</strong></p>
+<pre><code>bentoctl operator update [OPTIONS] NAME
+</code></pre>
+<p><strong>Options:</strong></p>
+<pre><code>  --verbose, --debug  Show debug logs when running the command
+  --do-not-track      Do not send uage info
+  --help              Show this message and exit.
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../operator-list/" class="btn btn-neutral float-left" title="Operators"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../operator-list/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
