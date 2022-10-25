@@ -174,10 +174,13 @@ class DeploymentConfig:
             env_schema = remove_help_message(
                 {"env": copy.deepcopy(deployment_config_schema["env"])}
             )
-            validated_env = v.validated({"env": copied_env}, env_schema)["env"]
+            breakpoint()
+            validated_env = v.validated({"env": copied_env}, env_schema)
             if validated_env is None:
                 raise InvalidDeploymentConfig(config_errors=v.errors)
-        self.env = validated_env
+            elif "env" not in validated_env:
+                raise InvalidDeploymentConfig()
+        self.env = validated_env["env"]
 
     def _set_operator_spec(self):
         # cleanup operator_schema by removing 'help_message' field
